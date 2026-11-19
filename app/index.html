@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice Cover Studio — turn your photo into poster cover art</title>
+<meta name="description" content="A cover art maker in the style of classic open-world posters: multi-panel layouts, bold caption lettering and sunset or neon colour grades. Your photo, your caption, exported as a PNG.">
+<link rel="stylesheet" href="style.css">
+<script type="module" src="src/main.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-sun" aria-hidden="true"></span>
+    <span class="brand-name">VICE COVER STUDIO</span>
+  </div>
+  <p class="tagline">Your photo. Your caption. Poster-ready cover art — in four steps.</p>
+</header>
+
+<main class="editor">
+  <section class="preview-column" aria-label="Live cover preview">
+    <div id="previewWrap" class="preview-wrap">
+      <canvas id="previewCanvas" aria-label="Cover preview — click a panel to select it, drag to position its photo"></canvas>
+      <div id="dropHint" class="drop-hint" aria-hidden="true">Drop photos to add them</div>
+    </div>
+    <div class="panel-bar">
+      <span id="panelHint">Panel 1 — drag to position, scroll to zoom</span>
+      <label class="zoom-control">Zoom
+        <input id="zoomRange" type="range" min="100" max="300" value="112" step="1">
+        <span id="zoomValue">112%</span>
+      </label>
+      <button id="resetCropBtn" type="button">Reset crop</button>
+    </div>
+  </section>
+
+  <aside class="controls" aria-label="Cover controls">
+    <section class="step">
+      <h2><span class="step-number">1</span> Photos</h2>
+      <div class="photo-actions">
+        <label class="upload-btn" for="photoFileInput">+ Add your photos</label>
+        <input id="photoFileInput" type="file" accept="image/*" multiple hidden>
+        <button id="samplePierBtn" type="button" class="sample-btn">Try the pier</button>
+        <button id="sampleBoulevardBtn" type="button" class="sample-btn">Try the boulevard</button>
+      </div>
+      <p id="photoEmpty" class="hint">No photos yet — panels show a drawn sunset until you add one.</p>
+      <div id="photoLibrary" class="photo-library" aria-label="Your photos — click one to put it in the selected panel"></div>
+      <button id="fillAllPanelsBtn" type="button" class="secondary-btn">Fill every panel with this photo</button>
+      <p class="hint">Click a panel in the preview to select it, then click a photo to fill it. Drag a photo onto the preview to add it.</p>
+    </section>
+
+    <section class="step">
+      <h2><span class="step-number">2</span> Layout</h2>
+      <div id="layoutPicker" class="layout-picker" role="group" aria-label="Panel layout"></div>
+    </section>
+
+    <section class="step">
+      <h2><span class="step-number">3</span> Caption &amp; grade</h2>
+      <label class="field-label" for="captionTitleInput">Title</label>
+      <input id="captionTitleInput" type="text" value="Sunset Heist" maxlength="40" autocomplete="off">
+      <label class="field-label" for="captionSubtitleInput">Subtitle</label>
+      <input id="captionSubtitleInput" type="text" value="Neon Boulevard" maxlength="48" autocomplete="off">
+      <div class="field-row">
+        <label class="field-label" for="captionSizeRange">Title size <span id="captionSizeValue">100%</span></label>
+        <input id="captionSizeRange" type="range" min="70" max="140" value="100" step="1">
+      </div>
+      <span class="field-label">Title colour</span>
+      <div id="titleColorPicker" class="color-picker" role="group" aria-label="Title colour"></div>
+      <span class="field-label">Lettering</span>
+      <div id="titleStylePicker" class="segmented" role="group" aria-label="Lettering style">
+        <button type="button" data-title-style="outline">Bold outline</button>
+        <button type="button" data-title-style="shadow">Drop shadow</button>
+        <button type="button" data-title-style="flat">Flat</button>
+      </div>
+      <span class="field-label">Colour grade</span>
+      <div id="gradePicker" class="grade-picker" role="group" aria-label="Colour grade"></div>
+    </section>
+
+    <section class="step">
+      <h2><span class="step-number">4</span> Export</h2>
+      <div id="sizePicker" class="size-picker" role="group" aria-label="Export size"></div>
+      <button id="exportPngBtn" type="button" class="export-btn">Download PNG</button>
+      <p class="hint">Rendered at exact pixels, straight from the live preview.</p>
+    </section>
+
+    <p class="privacy-note">Photos never leave your machine — everything renders locally, offline.</p>
+  </aside>
+</main>
+</body>
+</html>
